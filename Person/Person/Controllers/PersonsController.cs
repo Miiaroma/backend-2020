@@ -47,20 +47,23 @@ namespace Person.Controllers
         [HttpPost]
         public IActionResult Post([FromBody] Person1 person1)
         {
-            var result = _personRepository.Create(person1);
+            var result = _personService.Create(person1);
             return new JsonResult(result);
         }
-
+        
         // PUT: api/Persons/5
         [HttpPut("{id}")]
-        public void Put(int id, [FromBody] string value)
+        public IActionResult Put( [FromBody] Person1 person1)
         {
+            var result = _personService.Update(person1);
+            return new JsonResult(result);
         }
 
         // DELETE: api/ApiWithActions/5
         [HttpDelete("{id}")]
-        public void Delete(int id)
+        public void Delete(string id)
         {
+            _personService.Delete(id);
         }
     }
 }

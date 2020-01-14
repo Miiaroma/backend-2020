@@ -29,7 +29,7 @@ namespace Person
         // This method gets called by the runtime. Use this method to add services to the container.
         public void ConfigureServices(IServiceCollection services)
         {
-            services.AddScoped<IPersonRepository, PersonRepository>();
+            services.AddScoped<IPersonRepository, _PersonRepository>();
             services.AddScoped<IPersonService, PersonService>();
             services.AddDbContext<PersondbContext>(option =>
             {

@@ -7,13 +7,13 @@ using PersonExample.Models;
 
 namespace PersonExample.Repositories
 {
-    public class PersonRepository : IPersonRepository
+    public class _PersonRepository : IPersonRepository
     {
         //injected database
         private readonly PersondbContext _persondbContext;
 
         //Define Constructor
-        public PersonRepository(PersondbContext persondbContext)
+        public _PersonRepository(PersondbContext persondbContext)
         {
             _persondbContext = persondbContext;
         }
@@ -22,8 +22,13 @@ namespace PersonExample.Repositories
         {
             _persondbContext.Person1.Add(person1);
             _persondbContext.SaveChanges();
-            return person1; 
-          
+            return person1;           
+        }
+
+        public void Delete(Person1 person1)
+        {
+            _persondbContext.Person1.Remove(person1);
+            _persondbContext.SaveChanges();
         }
 
         public List<Person1> Read()
@@ -38,5 +43,14 @@ namespace PersonExample.Repositories
             var person = _persondbContext.Person1.FirstOrDefault(p =>p.Id == id);
             return person;
         }
+
+        public Person1 Update(Person1 person1)
+        {
+            _persondbContext.Update(person1);
+            _persondbContext.SaveChanges();
+            return person1;
+        }
+
+        
     }
 }
