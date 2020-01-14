@@ -5,6 +5,7 @@ using System.Threading.Tasks;
 using Microsoft.AspNetCore.Http;
 using Microsoft.AspNetCore.Mvc;
 using PersonExample.Data;
+using PersonExample.Models;
 using PersonExample.Repositories;
 using PersonExample.Services;
 
@@ -16,10 +17,12 @@ namespace Person.Controllers
     {
         //Inject Repository
         private readonly IPersonService _personService;
+        private readonly IPersonRepository _personRepository;
 
-        public PersonController(IPersonService personService)
+        public PersonController(IPersonService personService, IPersonRepository personRepository)
         {
             _personService = personService;
+            _personRepository = personRepository;
         }
 
 
@@ -42,8 +45,10 @@ namespace Person.Controllers
 
         // POST: api/Persons
         [HttpPost]
-        public void Post([FromBody] string value)
+        public IActionResult Post([FromBody] Person1 person1)
         {
+            var result = _personRepository.Create(person1);
+            return new JsonResult(result);
         }
 
         // PUT: api/Persons/5

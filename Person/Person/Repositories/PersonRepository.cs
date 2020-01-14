@@ -18,6 +18,14 @@ namespace PersonExample.Repositories
             _persondbContext = persondbContext;
         }
 
+        public Person1 Create(Person1 person1)
+        {
+            _persondbContext.Person1.Add(person1);
+            _persondbContext.SaveChanges();
+            return person1; 
+          
+        }
+
         public List<Person1> Read()
         {
            var persons = _persondbContext.Person1.ToList();
