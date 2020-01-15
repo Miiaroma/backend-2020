@@ -53,10 +53,10 @@ namespace Person.Controllers
         
         // PUT: api/Persons/5
         [HttpPut("{id}")]
-        public IActionResult Put( [FromBody] Person1 person1)
+        public ActionResult <Person1> Put(string id, Person1 person1)
         {
-            var result = _personService.Update(person1);
-            return new JsonResult(result);
+            var updatedPerson = _personService.Update(id, person1);
+            return updatedPerson;
         }
 
         // DELETE: api/ApiWithActions/5

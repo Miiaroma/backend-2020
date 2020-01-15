@@ -2,6 +2,7 @@
 using PersonExample.Repositories;
 using System;
 using System.Collections.Generic;
+using Microsoft.AspNetCore.Mvc;
 using System.Linq;
 using System.Threading.Tasks;
 
@@ -44,16 +45,18 @@ namespace PersonExample.Services
 
         public Person1 Update(string id, Person1 person1)
         {
-            var updatePerson = _personRepository.Read(id);
-            if (updatePerson == null)
+            var updatedPerson = _personRepository.Read(id);
+            if (updatedPerson == null)
             {
-                throw new Exception("Contact not found!");
+                throw new Exception("Person not found!");
             }
             else
             {
                 return _personRepository.Update(person1);
             }
         }
+
+        
     }
 }
 

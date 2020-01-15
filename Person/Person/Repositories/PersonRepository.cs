@@ -2,8 +2,10 @@
 using System.Collections.Generic;
 using System.Linq;
 using System.Threading.Tasks;
+using Microsoft.EntityFrameworkCore;
 using PersonExample.Data;
 using PersonExample.Models;
+
 
 namespace PersonExample.Repositories
 {
@@ -40,7 +42,7 @@ namespace PersonExample.Repositories
 
         public Person1 Read(string id)
         {
-            var person = _persondbContext.Person1.FirstOrDefault(p =>p.Id == id);
+            var person = _persondbContext.Person1.AsNoTracking().FirstOrDefault(p =>p.Id == id);
             return person;
         }
 
@@ -49,8 +51,6 @@ namespace PersonExample.Repositories
             _persondbContext.Update(person1);
             _persondbContext.SaveChanges();
             return person1;
-        }
-
-        
+        }        
     }
 }
