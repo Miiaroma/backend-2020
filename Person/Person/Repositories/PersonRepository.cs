@@ -21,7 +21,9 @@ namespace PersonExample.Repositories
         }
 
         public Person1 Create(Person1 person1)
-        {
+        {   //1. INSERT Lisätään henkilö PERSON-tauluun
+            //2. SELECT luetaan ja otetaan talteen uuden henkilön ID
+            //3. INSERT lisätään puhelinnumerot PHONE -tauluun viiteavaimen käytetään
             _persondbContext.Person1.Add(person1);
             _persondbContext.SaveChanges();
             return person1;           
@@ -34,15 +36,23 @@ namespace PersonExample.Repositories
         }
 
         public List<Person1> Read()
-        {
-           var persons = _persondbContext.Person1.ToList();
-            return persons;
-           
+        {   //SELCECT *FROM  PERSON
+            //LEFT INTER JOIN
+            //Phone ON Person.Id = Phone.PersonId
+            //WHERE Person.Id = "SELECT ..."
+            var persons = _persondbContext.Person1
+
+                 .Include(p => p.Phone)
+                 .ToList();
+            return persons;           
         }
 
         public Person1 Read(string id)
         {
-            var person = _persondbContext.Person1.AsNoTracking().FirstOrDefault(p =>p.Id == id);
+            var person = _persondbContext.Person1
+                .Include(p => p.Phone)
+                .AsNoTracking().FirstOrDefault(p => p.Id == id);
+                 
             return person;
         }
 
