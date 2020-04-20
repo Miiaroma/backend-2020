@@ -35,7 +35,6 @@ namespace CurrencyApi
 
 
             services.AddDbContext<Dtbankdb1Context>(option =>
-
             {
                 option.UseSqlServer(Configuration.GetConnectionString("LocalBankConnectionString"));
                 //option.UseSqlServer(Configuration.GetConnectionString("LoginAzureConnection"));
@@ -48,7 +47,6 @@ namespace CurrencyApi
 
 
             services.AddMvc().SetCompatibilityVersion(CompatibilityVersion.Version_3_0);
-
             services.AddControllers();
         }
 

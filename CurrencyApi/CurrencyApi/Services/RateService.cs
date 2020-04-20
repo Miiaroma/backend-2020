@@ -27,11 +27,11 @@ namespace CurrencyApi.Services
             return rates;
         }
 
-        public RATE Read(string id)
+        /*public RATE Read(string id)
         {
             var rate = _rateRepository.Read(id);
-            return rate;           
-        }
+            return rate;
+        }*/
 
         public RATE Update(string id, RATE rate)
         {
@@ -44,7 +44,13 @@ namespace CurrencyApi.Services
             {
                 return _rateRepository.Update(rate);
             }
-            
         }
+
+        public RATE Read(string country)
+        {
+            var rate = _rateRepository.Read(country);
+            return rate;
+        }
+
     }
 }

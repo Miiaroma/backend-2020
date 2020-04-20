@@ -10,7 +10,7 @@ namespace CurrencyApi.Repositories
     {
         RATE Create(RATE rate);
         List<RATE> Read();
-        RATE Read(string id);
-        RATE Update(RATE rate);
+        RATE Read(string country);
+        RATE Update(RATE rate);        
     }
 }

@@ -10,7 +10,7 @@ using Microsoft.AspNetCore.Mvc;
 
 namespace CurrencyApi.Controllers
 {
-    [Route("api/rates")]
+    [Route("api/[controller]")]
     [ApiController]
     public class RatesController : ControllerBase
     {
@@ -22,8 +22,8 @@ namespace CurrencyApi.Controllers
             _rateService = rateService;
             _rateRepository = rateRepository;
         }
-        
-        // GET: api/Rates
+
+        // GET: api/Rates        
         [HttpGet]
         public IActionResult Get()
         {
@@ -32,14 +32,14 @@ namespace CurrencyApi.Controllers
             //return new string[] { "value1", "value2" };
         }
 
-        // GET: api/Rates/5
-        [HttpGet("{id}", Name = "Get")]
+        //GET: api/Rates/5
+        /*[HttpGet("{id}")]
         public IActionResult Get(string id)
         {
             var result = _rateService.Read(id);
             return new JsonResult(result);
-        }
-
+        }*/
+       
         // POST: api/Rates
         [HttpPost]
         public IActionResult Post([FromBody] RATE rate)
@@ -54,6 +54,14 @@ namespace CurrencyApi.Controllers
         {
             var updatedRate = _rateService.Update(id, rate);
             return updatedRate;
+        }
+
+        [HttpGet("{country}")]
+        
+        public IActionResult Get(string country)
+        {
+            var result = _rateService.Read(country);
+            return new JsonResult(result);
         }
 
         // DELETE: api/ApiWithActions/5

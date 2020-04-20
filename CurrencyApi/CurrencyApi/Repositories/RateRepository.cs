@@ -25,25 +25,24 @@ namespace CurrencyApi.Repositories
             return rate;            
         }
 
+        public RATE Read(string country)
+        {
+            var rate = _dtbankdb1Context.RATE.
+                AsNoTracking().FirstOrDefault(p => p.Country == country);
+            return rate;
+        }
         public List<RATE> Read()
         {
             var rates = _dtbankdb1Context.RATE                 
                  .ToList();
             return rates;
         }
-
-        public RATE Read(string id)
-        {
-            var rate = _dtbankdb1Context.RATE                
-                .AsNoTracking().FirstOrDefault(p => p.Id == id);
-            return rate;            
-        }
-
+             
         public RATE Update(RATE rate)
         {
             _dtbankdb1Context.Update(rate);
             _dtbankdb1Context.SaveChanges();
             return rate;
-        }
+        }   
     }
 }
