@@ -30,15 +30,7 @@ namespace CurrencyApi.Controllers
             var result = _rateService.Read();
             return new JsonResult(result);
             //return new string[] { "value1", "value2" };
-        }
-
-        //GET: api/Rates/5
-        /*[HttpGet("{id}")]
-        public IActionResult Get(string id)
-        {
-            var result = _rateService.Read(id);
-            return new JsonResult(result);
-        }*/
+        }       
        
         // POST: api/Rates
         [HttpPost]
@@ -56,18 +48,31 @@ namespace CurrencyApi.Controllers
             return updatedRate;
         }
 
+       /* [HttpGet("{id}")]
+        public IActionResult Get(string id)
+        {
+            var result = _rateService.Read(id);
+            return new JsonResult(result);
+        }*/
+
         [HttpGet("{country}")]
-        
         public IActionResult Get(string country)
         {
             var result = _rateService.Read(country);
             return new JsonResult(result);
         }
 
+        [HttpGet("{amount}/{sourceCountry}/{targetCountry}")]
+        public IActionResult Get(decimal amount, string sourceCountry, string targetCountry)
+        {
+            var result = _rateService.Read(amount, sourceCountry, targetCountry);
+            return new JsonResult(result);
+        }
+
         // DELETE: api/ApiWithActions/5
-        [HttpDelete("{id}")]
+        /*[HttpDelete("{id}")]
         public void Delete(string id)
         {
-        }
+        }*/
     }     
 }

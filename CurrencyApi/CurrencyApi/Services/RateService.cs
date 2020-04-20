@@ -33,6 +33,28 @@ namespace CurrencyApi.Services
             return rate;
         }*/
 
+        public RATE Read(string country)
+        {
+            var rate = _rateRepository.Read(country);
+            return rate;
+        }
+
+        public decimal Read(decimal amount, string sourceCountry, string targetCountry)
+        {
+            var sourceRate = this.Read(sourceCountry);
+            var targetRate = this.Read(targetCountry);
+
+            if (sourceRate != null && targetRate != null && amount != 0)
+            {
+                var result = amount * (sourceRate.Rate1 / targetRate.Rate1);
+                return (decimal)result;
+            }
+            else
+            {
+                return 0;
+            }
+        }
+
         public RATE Update(string id, RATE rate)
         {
             var updatedPerson = _rateRepository.Read(id);
@@ -45,12 +67,5 @@ namespace CurrencyApi.Services
                 return _rateRepository.Update(rate);
             }
         }
-
-        public RATE Read(string country)
-        {
-            var rate = _rateRepository.Read(country);
-            return rate;
-        }
-
     }
 }

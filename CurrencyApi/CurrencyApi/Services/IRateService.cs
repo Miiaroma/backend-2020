@@ -12,6 +12,7 @@ namespace CurrencyApi.Services
         List<RATE> Read();
         //RATE Read(string id);
         RATE Update(string id, RATE rate);
-        RATE Read(string country);        
+        RATE Read(string country);
+        decimal Read(decimal amount, string sourceCountry, string targetCountry);
     }
 }
